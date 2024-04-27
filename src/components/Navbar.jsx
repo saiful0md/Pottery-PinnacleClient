@@ -1,28 +1,37 @@
 
-import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
     const [theme, setTheme] = useState('light');
-    useEffect(()=>{
+    useEffect(() => {
         localStorage.setItem('theme', theme)
         const localTheme = localStorage.getItem('theme')
         document.querySelector('html').setAttribute('data-theme', localTheme)
-    },[theme])
+    }, [theme])
     const navLinks = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/allArtAndCraft'}>All Art & craft Items</NavLink></li>
         <li><NavLink to={'/addCraft'}>Add Craft Item</NavLink></li>
         <li><NavLink to={'/myArtAndCraft'}>My Art & Craft List</NavLink></li>
     </>
-    const handleToggle = e =>{
-        if(e.target.checked){
+    const handleToggle = e => {
+        if (e.target.checked) {
             setTheme('dark')
-        }else{
+        } else {
             setTheme('light')
         }
     }
-   
+    const handleLogOut = ()=>{
+        logOut()
+        .then(()=>{console.log('logout succsse')})
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+
     return (
         <div className="navbar bg-base-100 container max-w-6xl mx-auto">
             <div className="navbar-start">
@@ -51,16 +60,17 @@ const Navbar = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
                             <a className="justify-between">
-                                Profile
+                                {user?.email}
                             </a>
                         </li>
-                        <li><a>Register</a></li>
-                        <li><a>Logout</a></li>
+                        <li><Link to={'/register'}>Register</Link></li>
+                        <li><Link to={'/login'}>Login</Link></li>
+                        <li><a onClick={handleLogOut}>Logout</a></li>
                     </ul>
                 </div>
                 <label className="cursor-pointer ml-4 grid place-items-center">
                     <input
-                    onChange={handleToggle}
+                        onChange={handleToggle}
                         type="checkbox"
                         value="synthwave"
                         className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
