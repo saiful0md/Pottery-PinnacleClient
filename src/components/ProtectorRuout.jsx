@@ -7,7 +7,6 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const ProtectorRuout = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const location = useLocation();
-    console.log(location);
 
     if (loading) {
         return <div className='max-w-lg mx-auto flex items-center justify-center'>

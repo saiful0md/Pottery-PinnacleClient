@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
@@ -15,8 +16,10 @@ const AddCraft = () => {
         const rating = form.rating.value;
         const customization = form.customization.value;
         const processing = form.processing.value;
-        const stock = form.stock.value;
-        const product = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stock }
+        const stockStatus = form.stockStatus.value;
+        const userName = form.userName.value;
+        const email = form.email.value;
+        const product = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stockStatus , userName, email}
         // console.log(product);
 
         fetch('http://localhost:5000/addCraft', {
@@ -28,7 +31,15 @@ const AddCraft = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Added Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                    form.reset()
+                }
             })
     }
     return (
@@ -44,13 +55,13 @@ const AddCraft = () => {
                     <div className="md:flex gap-4">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Image</span>
+                                <span className="label-text font-semibold">Image</span>
                             </div>
                             <input type="text" name="photoUrl" placeholder="Photo URL" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Item Name</span>
+                                <span className="label-text font-semibold">Item Name</span>
                             </div>
                             <input type="text" name="itemName" placeholder="Item Name" className="input input-bordered w-full" />
                         </label>
@@ -59,13 +70,13 @@ const AddCraft = () => {
                     <div className="md:flex gap-4">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Subcategory Name</span>
+                                <span className="label-text font-semibold">Subcategory Name</span>
                             </div>
                             <input type="text" name="subCategory" placeholder="Subcategory Name" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Short Description</span>
+                                <span className="label-text font-semibold">Short Description</span>
                             </div>
                             <input type="text" name="description" placeholder="Short Descriptione" className="input input-bordered w-full" />
                         </label>
@@ -74,19 +85,19 @@ const AddCraft = () => {
                     <div className="md:flex gap-4">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Price</span>
+                                <span className="label-text font-semibold">Price</span>
                             </div>
                             <input type="text" name="price" placeholder="Price" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Rating</span>
+                                <span className="label-text font-semibold">Rating</span>
                             </div>
                             <input type="text" name="rating" placeholder="Rating" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Customization</span>
+                                <span className="label-text font-semibold">Customization</span>
                             </div>
                             <div className="flex items-center gap-4 border py-3 rounded-md">
                                 <span className="ml-4">Yes</span>
@@ -100,28 +111,33 @@ const AddCraft = () => {
                     <div className="md:flex gap-4">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Processing Time</span>
+                                <span className="label-text font-semibold">Processing Time</span>
                             </div>
                             <input type="text" name="processing" placeholder="Processing Time" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Stock Status</span>
+                                <span className="label-text font-semibold">Stock Status</span>
                             </div>
-                            <input type="text" name="stock" placeholder="Stock Status" className="input input-bordered w-full" />
+                            <div className="flex items-center gap-4 border py-3 rounded-md">
+                                <span className="ml-4">In Stock</span>
+                                <input type="radio" name="stockStatus" value='In Stock' className="radio" />
+                                <span className="ml-2">Made to order</span>
+                                <input type="radio" name="stockStatus" value='Made to order' className="radio" />
+                            </div>
                         </label>
                     </div>
                     {/* Form row 5 */}
                     <div className="md:flex gap-4">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">User Name</span>
+                                <span className="label-text font-semibold">User Name</span>
                             </div>
                             <input type="text" name="userName" placeholder="User Name" disabled defaultValue={user.displayName} className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">User Email</span>
+                                <span className="label-text font-semibold">User Email</span>
                             </div>
                             <input type="email" name="email" placeholder="User Email" disabled defaultValue={user.email} className="input input-bordered w-full" />
                         </label>

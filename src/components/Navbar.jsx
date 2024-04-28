@@ -1,12 +1,11 @@
 
 import { useContext, useEffect, useState } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [theme, setTheme] = useState('light');
-    const location = useLocation();
     const navigate = useNavigate()
     useEffect(() => {
         localStorage.setItem('theme', theme)
@@ -28,9 +27,9 @@ const Navbar = () => {
     }
     const handleLogOut = () => {
         logOut()
-            .then(() => { 
-                navigate(location.state || '/')
-             })
+            .then(() => {
+                navigate( '/')
+            })
             .catch(error => {
                 console.log(error);
             })
@@ -58,7 +57,7 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img alt="" src={user?.photoUlr || 'https://i.ibb.co/YcsgQSK/social-avatar-stories-gradient-frame-41737-3.jpg'} />
+                            <img alt="" src={user?.photoURL || 'https://i.ibb.co/YcsgQSK/social-avatar-stories-gradient-frame-41737-3.jpg'} />
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52">
@@ -66,6 +65,11 @@ const Navbar = () => {
                             {
                                 user ?
                                     <>
+                                        <li>
+                                            <a className="justify-between">
+                                                {user?.displayName}
+                                            </a>
+                                        </li>
                                         <li>
                                             <a className="justify-between">
                                                 {user?.email}

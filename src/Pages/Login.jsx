@@ -5,7 +5,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
 const Login = () => {
-    const {signIn} = useContext(AuthContext)
+    const {signIn, signinWithGoogle, signinWithGitHub} = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate()
     const handleLogin =e =>{
@@ -17,9 +17,28 @@ const Login = () => {
         signIn(email, password)
         .then(result=>{
             console.log(result);
-            navigate(location?.state ? location.state : '/')
+            navigate(location?.state || '/')
         })
-        .then(error=>{
+        .catch(error=>{
+            console.log(error);
+        })
+    }
+    const handleGoogleLogin =()=>{
+        signinWithGoogle()
+        .then(result =>{
+            console.log(result);
+            navigate('/')
+        })
+        .catch(error =>{
+            console.log(error.massege);
+        })
+    }
+    const handleGitHubLogIn =()=>{
+        signinWithGitHub()
+        .then(result =>{
+            console.log(result);
+        })
+        .catch(error=>{
             console.log(error);
         })
     }
@@ -47,10 +66,10 @@ const Login = () => {
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
                 </div>
                 <div className="flex justify-center space-x-4">
-                    <button aria-label="Log in with Google" className="p-3 rounded-sm">
+                    <button onClick={handleGoogleLogin} aria-label="Log in with Google" className="p-3 rounded-sm">
                         <FaGoogle className="text-xl"></FaGoogle>
                     </button>
-                    <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+                    <button onClick={handleGitHubLogIn} aria-label="Log in with GitHub" className="p-3 rounded-sm">
                        <FaGithub className="text-xl"></FaGithub>
                     </button>
                 </div>
