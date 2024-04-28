@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import MyArtAndCraft from "../Pages/MyArtAndCraft";
 import Register from "../Pages/Register";
 import ProtectorRuout from "../components/ProtectorRuout";
+import UpdateProduct from "../components/UpdateProduct";
 
 const Router = createBrowserRouter([
     {
@@ -36,12 +37,18 @@ const Router = createBrowserRouter([
                 </ProtectorRuout>
             },
             {
+                path: '/update/:id',
+                element: <ProtectorRuout>
+                    <UpdateProduct></UpdateProduct>
+                </ProtectorRuout>,
+            },
+            {
                 path: '/login',
                 element: <Login></Login>
             },
             {
-                path:'/register',
-                element:<Register></Register>
+                path: '/register',
+                element: <Register></Register>
             }
         ]
     }

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
@@ -23,11 +24,25 @@ const Register = () => {
                 console.log(result.user);
                 userInfoUpdate(name, photoUrl)
                     .then(() => {
+                        Swal.fire({
+                            title: "Success!",
+                            text: 'Register Successfully',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        })
+                        form.reset()
                         navigate(location?.state || '/')
+
                     })
             })
             .catch(error => {
                 console.log(error.message);
+                Swal.fire({
+                    title: "error!",
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
             })
 
     }

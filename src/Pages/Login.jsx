@@ -1,46 +1,85 @@
 import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
 const Login = () => {
-    const {signIn, signinWithGoogle, signinWithGitHub} = useContext(AuthContext)
+    const { signIn, signinWithGoogle, signinWithGitHub } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate()
-    const handleLogin =e =>{
+    const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
         signIn(email, password)
-        .then(result=>{
-            console.log(result);
-            navigate(location?.state || '/')
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result);
+                Swal.fire({
+                    title: "Success!",
+                    text: 'Login Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                form.reset()
+                navigate(location?.state || '/')
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'try again'
+                  })
+            })
     }
-    const handleGoogleLogin =()=>{
+    const handleGoogleLogin = () => {
         signinWithGoogle()
-        .then(result =>{
-            console.log(result);
-            navigate('/')
-        })
-        .catch(error =>{
-            console.log(error.massege);
-        })
+            .then(result => {
+                console.log(result);
+                Swal.fire({
+                    title: "Success!",
+                    text: 'Login Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                navigate(location?.state || '/')
+            })
+            .catch(error => {
+                console.log(error.massege);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'try again'
+                  })
+            })
     }
-    const handleGitHubLogIn =()=>{
+    const handleGitHubLogIn = () => {
         signinWithGitHub()
-        .then(result =>{
-            console.log(result);
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result);
+                Swal.fire({
+                    title: "Success!",
+                    text: 'Login Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                navigate(location?.state || '/')
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'try again'
+                  })
+            })
     }
     return (
         <div className=" dark:bg-gray-50 dark:text-gray-800">
@@ -70,7 +109,7 @@ const Login = () => {
                         <FaGoogle className="text-xl"></FaGoogle>
                     </button>
                     <button onClick={handleGitHubLogIn} aria-label="Log in with GitHub" className="p-3 rounded-sm">
-                       <FaGithub className="text-xl"></FaGithub>
+                        <FaGithub className="text-xl"></FaGithub>
                     </button>
                 </div>
                 <p className="text-xs text-center sm:px-6 dark:text-gray-600">Don&apos;t have an account?
