@@ -1,19 +1,26 @@
 import PropTypes from 'prop-types';
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
 const ProtectorRuout = ({ children }) => {
-    const { user } = useContext(AuthContext)
+    const { user, loading } = useContext(AuthContext)
+    const location = useLocation();
+    console.log(location);
 
+    if (loading) {
+        return <div className='max-w-lg mx-auto flex items-center justify-center'>
+            <div className="w-16 h-16 border-4  border-dashed rounded-full animate-spin dark:border-violet-600"></div>
+        </div>
+    }
     if (user) {
         return children
     }
-    return <Navigate to={'/login'}></Navigate>
+    return <Navigate to={'/login'} state={location.pathname}></Navigate>
 
 };
-ProtectorRuout.propTypes ={
+ProtectorRuout.propTypes = {
     children: PropTypes.node
 }
 

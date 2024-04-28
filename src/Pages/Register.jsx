@@ -1,11 +1,14 @@
-import { useContext } from "react";
-import { FaEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext)
+    const { createUser, userInfoUpdate } = useContext(AuthContext)
+    const [showPass, setShowPass] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
@@ -18,6 +21,10 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+                userInfoUpdate(name, photoUrl)
+                    .then(() => {
+                        navigate(location?.state || '/')
+                    })
             })
             .catch(error => {
                 console.log(error.message);
@@ -56,8 +63,16 @@ const Register = () => {
                                     <span className="label-text">Password</span>
                                 </label>
                                 <div className="flex w-full relative ">
-                                    <input type="password" name="password" placeholder="Password" className="input w-full input-bordered" required />
-                                    <span className="absolute top-4 right-3"><FaEye></FaEye></span>
+                                    <input
+                                        type={showPass ? 'text' : 'password'}
+                                        name="password"
+                                        placeholder="Password"
+                                        className="input w-full input-bordered" required />
+                                    <span onClick={()=> setShowPass(!showPass)} className="absolute top-4 right-3">
+                                        {
+                                            showPass ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>
+                                        }
+                                    </span>
                                 </div>
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
