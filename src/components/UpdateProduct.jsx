@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const UpdateProduct = () => {
     const { id } = useParams()
     const [product, setProduct] = useState({});
-    console.log(product);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`http://localhost:5000/singleProduct/${id}`)
-        .then(res => res.json())
-        .then(data=>{
-            setProduct(data);
-        })
-    },[id])
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+            })
+    }, [id])
 
-    const handleUdate = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
         const form = e.target;
         const photoUrl = form.photoUrl.value;
@@ -27,19 +27,25 @@ const UpdateProduct = () => {
         const customization = form.customization.value;
         const processing = form.processing.value;
         const stockStatus = form.stockStatus.value;
-        const productInfo = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stockStatus }
-        console.log(productInfo);
+        const updateProductInfo = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stockStatus }
 
-        fetch(`http://localhost:5000/update/${id}`,{
-            method:"PUT",
+        fetch(`http://localhost:5000/update/${id}`, {
+            method: "PUT",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(productInfo)
+            body: JSON.stringify(updateProductInfo)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: 'Updated Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                }
             })
 
     }
@@ -47,7 +53,7 @@ const UpdateProduct = () => {
         <div className="bg-base-200">
             <div className="container max-w-4xl mx-auto text-center py-6 ">
                 <form
-                    onSubmit={handleUdate}
+                    onSubmit={handleUpdate}
                     className="w-full bg-base-100 p-10 rounded-xl">
                     <div>
                         <h2 className="text-3xl font-semibold mb-6 border-b pb-3">Update Your Product</h2>
@@ -100,11 +106,21 @@ const UpdateProduct = () => {
                             <div className="label">
                                 <span className="label-text font-semibold">Customization</span>
                             </div>
-                            <div className="flex items-center gap-4 border py-3 rounded-md">
+                            <div  className="flex items-center gap-4 border py-3 rounded-md">
                                 <span className="ml-4">Yes</span>
-                                <input type="radio" name="customization" defaultValue={product.customization} value='Yes' className="radio" />
+                                <input
+                                    type="radio"
+                                    name="customization"
+                                    value='Yes'
+                                    className="radio"
+                                />
                                 <span className="ml-2">No</span>
-                                <input type="radio" name="customization" defaultValue={product.customization} value='No' className="radio" />
+                                <input
+                                    type="radio"
+                                    name="customization"
+                                    value='No'
+                                    className="radio"
+                                />
                             </div>
                         </label>
                     </div>
