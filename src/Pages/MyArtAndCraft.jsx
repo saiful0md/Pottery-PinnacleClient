@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaStar } from "react-icons/fa";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -17,8 +17,7 @@ const MyArtAndCraft = () => {
                 setProducts(data);
             })
     }, [user])
-    const handleDelete =(id)=>{
-        console.log(id);
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -27,21 +26,33 @@ const MyArtAndCraft = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                fetch(`http://localhost:5000/delete/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            const remaining = products.filter(product => product._id !== id)
+                            setProducts(remaining)
+                        }
+                    })
             }
-          });
+        });
     }
     return (
         <div className="max-w-6xl mx-auto">
             <div>
                 <h2 className="text-4xl font-bold text-center my-8">My Art And Craft List</h2>
             </div>
+            <p className="w-16  text-amber-700 hover:text-amber-500 text-3xl p-3"> <Link to={'/'}><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link></p>
             <div className="grid grid-cols-3 gap-5">
                 {
                     products?.map(product => (
@@ -68,7 +79,7 @@ const MyArtAndCraft = () => {
                                 <p><span className="font-semibold">Stock Status:</span> <span>{product.stockStatus}</span></p>
                                 <div className="card-actions">
                                     <Link to={`/update/${product._id}`}><button className="btn btn-sm bg-green-600 hover:bg-green-400 text-white"><GrDocumentUpdate></GrDocumentUpdate></button></Link>
-                                    <button onClick={()=>handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
+                                    <button onClick={() => handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
                                 </div>
                             </div>
                         </div>

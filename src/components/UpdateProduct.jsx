@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -55,8 +56,9 @@ const UpdateProduct = () => {
                 <form
                     onSubmit={handleUpdate}
                     className="w-full bg-base-100 p-10 rounded-xl">
+                    <p className="w-16  text-amber-700 hover:text-amber-500 text-3xl p-3"> <Link to={'/myArtAndCraft'}><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link></p>
                     <div>
-                        <h2 className="text-3xl font-semibold mb-6 border-b pb-3">Update Your Product</h2>
+                        <h2 className="text-3xl font-semibold mb-6 border-b my-4 pb-6">Update Your Product</h2>
                     </div>
                     {/* Form row 1 */}
                     <div className="md:flex gap-4">
@@ -106,7 +108,7 @@ const UpdateProduct = () => {
                             <div className="label">
                                 <span className="label-text font-semibold">Customization</span>
                             </div>
-                            <div  className="flex items-center gap-4 border py-3 rounded-md">
+                            <div className="flex items-center gap-4 border py-3 rounded-md">
                                 <span className="ml-4">Yes</span>
                                 <input
                                     type="radio"
