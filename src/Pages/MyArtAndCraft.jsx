@@ -10,6 +10,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const MyArtAndCraft = () => {
     const { user } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
+    const [filterValue, setFilterValue ] = useState('')
     useEffect(() => {
         fetch(`http://localhost:5000/myArtAndCraft/${user?.email}`)
             .then(res => res.json())
@@ -47,15 +48,37 @@ const MyArtAndCraft = () => {
             }
         });
     }
+    const handleFilter = (event) => {
+        const value = event.target.value;
+        setFilterValue(value);
+    };
+    const filteredProducts = products.filter(product => {
+        if (filterValue === "") {
+            return true; 
+        } else {
+            return product.customization === filterValue; 
+        }
+    });
     return (
         <div className="max-w-6xl mx-auto">
             <div>
                 <h2 className="text-4xl font-bold text-center my-8">My Art And Craft List</h2>
             </div>
-            <p className="w-16  text-amber-700 hover:text-amber-500 text-3xl p-3"> <Link to={'/'}><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link></p>
-            <div className="grid grid-cols-3 gap-5">
+            <div className="flex max-w-[600px] items-center justify-between my-10">
+                <p className="w-16  text-amber-700 hover:text-amber-500 text-3xl p-3"> <Link to={'/'}><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link></p>
+                <label className="form-control w-full max-w-xs">
+                    <div className="label">
+                    </div>
+                    <select onChange={handleFilter} className="select select-bordered">
+                        <option value="">All</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </label>
+            </div>
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5">
                 {
-                    products?.map(product => (
+                    filteredProducts?.map(product => (
                         <div
                             key={product._id}
                             className="card  bg-base-100 shadow-xl">

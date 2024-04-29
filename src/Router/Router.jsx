@@ -7,8 +7,11 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import MyArtAndCraft from "../Pages/MyArtAndCraft";
 import Register from "../Pages/Register";
+import ArtAndCraftCategoriesSection from "../components/ArtAndCraftCategoriesSection";
+import CraftItemsSection from "../components/CraftItemsSection";
 import ProtectorRuout from "../components/ProtectorRuout";
 import UpdateProduct from "../components/UpdateProduct";
+import ViewDetailsCraftItem from "../components/ViewDetailsCraftItem";
 
 const Router = createBrowserRouter([
     {
@@ -19,6 +22,20 @@ const Router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/craftItemsSection',
+                element: <CraftItemsSection></CraftItemsSection>
+            },
+            {
+                path: '/ArtCraftCategoriesSection',
+                element: <ArtAndCraftCategoriesSection></ArtAndCraftCategoriesSection>
+            },
+            {
+                path: '/viewDetailsCraftItem/:id',
+                element: <ProtectorRuout>
+                    <ViewDetailsCraftItem></ViewDetailsCraftItem>
+                </ProtectorRuout>
             },
             {
                 path: '/allArtAndCraft',

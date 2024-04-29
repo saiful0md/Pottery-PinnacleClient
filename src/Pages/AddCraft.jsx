@@ -1,10 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 
 const AddCraft = () => {
     const { user } = useContext(AuthContext);
+    const [subCategoryValue, setSubCategoryValue] = useState('')
+    const options = [
+        {label:'Wheel-thrown Pottery', value:'Wheel-thrown Pottery'},
+        {label:'Hand-built Pottery', value:'Hand-built Pottery'},
+        {label:'Planters', value:'Planters'},
+        {label:'Bowls', value:'Bowls'},
+        {label:'Outdoor Decor', value:'Outdoor Decor'},
+        {label:'Decorative Porcelain', value:'Decorative Porcelain'},
+    ]
     const handleAddCraft = e => {
         e.preventDefault();
         const form = e.target;
@@ -67,11 +76,17 @@ const AddCraft = () => {
                     </div>
                     {/* Form row 2 */}
                     <div className="md:flex gap-4">
-                        <label className="form-control w-full">
+                        <label className="form-control w-full max-w-xs">
                             <div className="label">
-                                <span className="label-text font-semibold">Subcategory Name</span>
+                                <span className="label-text">Subcategory Name</span>
                             </div>
-                            <input type="text" name="subCategory" placeholder="Subcategory Name" className="input input-bordered w-full" />
+                            <select onChange={(e) => setSubCategoryValue(e.target.value)} className="select select-bordered"  name="subCategory">
+                                {
+                                    options.map((option, index) =>(
+                                        <option key={index} value={option.value}> {option.label}</option>
+                                    ))
+                                }
+                            </select>
                         </label>
                         <label className="form-control w-full">
                             <div className="label">

@@ -1,11 +1,15 @@
-import Slider from "../components/Slider/Slider";
+import ArtAndCraftCategoriesSection from "../components/ArtAndCraftCategoriesSection";
+import CraftItemsSection from "../components/CraftItemsSection";
+import Slider from "../components/Slider";
 
 
 
 const Home = () => {
     return (
         <div>
-            <Slider></Slider>          
+            <Slider></Slider>  
+            <CraftItemsSection></CraftItemsSection>        
+            <ArtAndCraftCategoriesSection></ArtAndCraftCategoriesSection>
         </div>
     );
 };
