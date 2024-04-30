@@ -7,7 +7,7 @@ const AllArtAndCraft = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/allArtAndCraft')
+        fetch('https://art-craft-store-server.vercel.app/allArtAndCraft')
             .then(res => res.json())
             .then(data => {
                 setAllproducts(data);

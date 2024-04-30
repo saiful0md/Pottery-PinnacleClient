@@ -30,7 +30,7 @@ const AddCraft = () => {
         const email = form.email.value;
         const product = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stockStatus, userName, email }
 
-        fetch('http://localhost:5000/addCraft', {
+        fetch('https://art-craft-store-server.vercel.app/addCraft', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

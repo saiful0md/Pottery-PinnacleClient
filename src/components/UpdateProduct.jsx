@@ -9,7 +9,7 @@ const UpdateProduct = () => {
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/singleProduct/${id}`)
+        fetch(`https://art-craft-store-server.vercel.app/singleProduct/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
@@ -30,7 +30,7 @@ const UpdateProduct = () => {
         const stockStatus = form.stockStatus.value;
         const updateProductInfo = { photoUrl, itemName, subCategory, description, price, rating, customization, processing, stockStatus }
 
-        fetch(`http://localhost:5000/update/${id}`, {
+        fetch(`https://art-craft-store-server.vercel.app/update/${id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

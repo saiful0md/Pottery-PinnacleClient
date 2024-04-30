@@ -13,7 +13,7 @@ const MyArtAndCraft = () => {
     const [products, setProducts] = useState([]);
     const [filterValue, setFilterValue] = useState('')
     useEffect(() => {
-        fetch(`http://localhost:5000/myArtAndCraft/${user?.email}`)
+        fetch(`https://art-craft-store-server.vercel.app/myArtAndCraft/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
@@ -30,7 +30,7 @@ const MyArtAndCraft = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/delete/${id}`, {
+                fetch(`https://art-craft-store-server.vercel.app/delete/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

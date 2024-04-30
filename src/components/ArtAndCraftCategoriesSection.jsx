@@ -5,7 +5,7 @@ import { Fade } from "react-awesome-reveal";
 const ArtAndCraftCategoriesSection = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/artAndCraftCategoriesSection')
+        fetch('https://art-craft-store-server.vercel.app/artAndCraftCategoriesSection')
             .then(res => res.json())
             .then(data => {
                 setProducts(data)

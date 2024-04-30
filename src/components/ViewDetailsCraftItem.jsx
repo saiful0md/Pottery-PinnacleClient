@@ -8,7 +8,7 @@ const ViewDetailsCraftItem = () => {
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/singleProduct/${id}`)
+        fetch(`https://art-craft-store-server.vercel.app/singleProduct/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
