@@ -13,10 +13,42 @@ const Navbar = () => {
         document.querySelector('html').setAttribute('data-theme', localTheme)
     }, [theme])
     const navLinks = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/allArtAndCraft'}>All Art & craft Items</NavLink></li>
-        <li><NavLink to={'/addCraft'}>Add Craft Item</NavLink></li>
-        <li><NavLink to={'/myArtAndCraft'}>My Art & Craft List</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            [
+                isPending
+                    ? "pending"
+                    : isActive
+                        ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
+                        : "hover:text-amber-600 "
+            ]
+        } to={'/'}>Home</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            [
+                 isPending
+                    ? "pending"
+                    : isActive
+                        ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
+                        : "hover:text-amber-600 "
+            ]
+        } to={'/allArtAndCraft'}>All Art & craft Items</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            [
+                 isPending
+                    ? "pending"
+                    : isActive
+                        ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
+                        : "hover:text-amber-600 "
+            ]
+        } to={'/addCraft'}>Add Craft Item</NavLink></li>
+        <li><NavLink className={({ isActive, isPending }) =>
+            [
+                 isPending
+                    ? "pending"
+                    : isActive
+                        ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
+                        : "hover:text-amber-600 "
+            ]
+        } to={'/myArtAndCraft'}>My Art & Craft List</NavLink></li>
     </>
     const handleToggle = e => {
         if (e.target.checked) {
@@ -28,7 +60,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut()
             .then(() => {
-                navigate( '/')
+                navigate('/')
             })
             .catch(error => {
                 console.log(error);
@@ -46,7 +78,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Pottery Pinnacle</a>
+                <a className="btn bg-transparent border-none shadow-none hover:bg-transparent lg:text-xl">Pottery Pinnacle</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

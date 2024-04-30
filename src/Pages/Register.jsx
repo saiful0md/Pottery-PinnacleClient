@@ -10,6 +10,7 @@ const Register = () => {
     const [showPass, setShowPass] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
+    const [registerError, setRegisterError] = useState('')
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
@@ -18,6 +19,16 @@ const Register = () => {
         const photoUrl = form.photoUrl.value;
         const password = form.password.value;
 
+        if (password.length < 6) {
+            setRegisterError("Password must have at least 6 characters long");
+            return
+        } else if (!/[a-z]/.test(password)) {
+            setRegisterError("Password must have at least  one lowercase letter");
+            return
+        } else if (!/[A-Z]/.test(password)) {
+            setRegisterError("Password must have at least one uppercase letter");
+            return
+        }
         console.log(name, email, photoUrl, password);
         createUser(email, password)
             .then(result => {
@@ -37,6 +48,7 @@ const Register = () => {
             })
             .catch(error => {
                 console.log(error.message);
+                setRegisterError(error.message)
                 Swal.fire({
                     title: "error!",
                     text: error.message,
@@ -83,7 +95,7 @@ const Register = () => {
                                         name="password"
                                         placeholder="Password"
                                         className="input w-full input-bordered" required />
-                                    <span onClick={()=> setShowPass(!showPass)} className="absolute top-4 right-3">
+                                    <span onClick={() => setShowPass(!showPass)} className="absolute top-4 right-3">
                                         {
                                             showPass ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>
                                         }
@@ -96,6 +108,7 @@ const Register = () => {
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Register</button>
                             </div>
+                            {registerError && <p className="text-red-600">{registerError}</p>}
                         </form>
                         <p className="text-xs text-center sm:px-6 dark:text-gray-600">Already have an account?
                             <Link to={'/login'} rel="noopener noreferrer" href="#" className="underline dark:text-gray-800">Login</Link>

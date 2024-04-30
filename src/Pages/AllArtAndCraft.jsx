@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const AllArtAndCraft = () => {
-    const { id } = useParams()
     const [allproducts, setAllproducts] = useState([])
     console.log(allproducts);
 
@@ -43,7 +42,7 @@ const AllArtAndCraft = () => {
                                     <tbody>
                                         {/* row 1 */}
                                         <tr className="grid grid-cols-4">
-                                            <td>{allproduct.itemName}</td>
+                                            <td>{allproduct.itemName}d</td>
                                             <td>{allproduct.subCategory}</td>
                                             <td>{allproduct.stockStatus}</td>
                                             <th>

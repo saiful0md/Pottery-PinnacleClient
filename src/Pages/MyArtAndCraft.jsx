@@ -10,7 +10,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const MyArtAndCraft = () => {
     const { user } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
-    const [filterValue, setFilterValue ] = useState('')
+    const [filterValue, setFilterValue] = useState('')
     useEffect(() => {
         fetch(`http://localhost:5000/myArtAndCraft/${user?.email}`)
             .then(res => res.json())
@@ -54,9 +54,9 @@ const MyArtAndCraft = () => {
     };
     const filteredProducts = products.filter(product => {
         if (filterValue === "") {
-            return true; 
+            return true;
         } else {
-            return product.customization === filterValue; 
+            return product.customization === filterValue;
         }
     });
     return (
@@ -64,15 +64,13 @@ const MyArtAndCraft = () => {
             <div>
                 <h2 className="text-4xl font-bold text-center my-8">My Art And Craft List</h2>
             </div>
-            <div className="flex max-w-[600px] items-center justify-between my-10">
+            <div className="flex max-w-[850px] items-center justify-between my-10">
                 <p className="w-16  text-amber-700 hover:text-amber-500 text-3xl p-3"> <Link to={'/'}><FaArrowAltCircleLeft></FaArrowAltCircleLeft></Link></p>
                 <label className="form-control w-full max-w-xs">
-                    <div className="label">
-                    </div>
-                    <select onChange={handleFilter} className="select select-bordered">
-                        <option value="">All</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                    <select onChange={handleFilter} className="select w-32 text-white btn hover:bg-amber-700 bg-amber-600 select-bordered">
+                        <option className="text-white" value="">All</option>
+                        <option className="text-white" value="Yes">Yes</option>
+                        <option className="text-white" value="No">No</option>
                     </select>
                 </label>
             </div>
@@ -81,28 +79,30 @@ const MyArtAndCraft = () => {
                     filteredProducts?.map(product => (
                         <div
                             key={product._id}
-                            className="card  bg-base-100 shadow-xl">
-                            <figure className="px-8 pt-8">
-                                <img
-                                    src={product.photoUrl} alt={`image to ${product.itemName}`} className="rounded-xl w-[300px] h-[300px]" />
-                            </figure>
-                            <div className="card-body items-center text-center">
-                                <h2 className="card-title">{product.itemName}</h2>
+                            className="card  bg-base-100 shadow-xl p-2">
+                            <figure><img src={product.photoUrl} className="max-h-72" alt="Shoes" /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">
+                                    {product.itemName}
+                                    <div className="btn btn-sm rounded-3xl btn-secondary">{product.stockStatus}</div>
+                                </h2>
                                 <p>{product.description}</p>
-                                <p className="flex items-center text-xl">
-                                    <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
-                                    <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
-                                    <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
-                                    <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
-                                    <FaStar className="mx-1 text-gray-500" ></FaStar>
-                                    {product.rating}
-                                </p>
-                                <p>${product.price}</p>
-                                <p><span className="font-semibold">Customization:</span> <span>{product.customization}</span></p>
-                                <p><span className="font-semibold">Stock Status:</span> <span>{product.stockStatus}</span></p>
-                                <div className="card-actions">
-                                    <Link to={`/update/${product._id}`}><button className="btn btn-sm bg-green-600 hover:bg-green-400 text-white"><GrDocumentUpdate></GrDocumentUpdate></button></Link>
-                                    <button onClick={() => handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
+                                <div className="card-actions items-center justify-end">
+                                    <p className="flex items-center text-xl">
+                                        <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
+                                        <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
+                                        <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
+                                        <FaStar className="ml-1 text-amber-400 hover:text-amber-600" ></FaStar>
+                                        <FaStar className="mx-1 text-gray-500" ></FaStar>
+                                        {product.rating}
+                                    </p>
+                                    <p className="text-2xl font-semibold">${product.price}</p>
+                                    <p><span className="font-semibold">Customization:</span> <span>{product.customization}</span></p>
+
+                                    <div className="card-actions my-3">
+                                        <Link to={`/update/${product._id}`}><button className="btn btn-sm bg-green-600 hover:bg-green-400 text-white"><GrDocumentUpdate></GrDocumentUpdate></button></Link>
+                                        <button onClick={() => handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 
 const Slider = () => {
     return (
-        <div className='h-[600px] bg-gradient-to-r from-[#ffa585] to-[#ffeda0]'>
+        <div className='lg:h-[600px] bg-gradient-to-r from-[#ffa585] to-[#ffeda0]'>
             <div className='container max-w-6xl mx-auto'>
                 <Swiper
                   effect={"fade"}
@@ -29,10 +29,10 @@ const Slider = () => {
                     className="mySwiper"
                 >
                     <SwiperSlide>
-                        <div className='md:h-[500px] h-screen mt-10'>
+                        <div className='md:h-[500px] h-auto mt-10'>
                             <div className='h-full gap-3 flex flex-col md:flex-row  mx-auto items-center '>
                                 <div className='text-start md:ml-10  flex-1 mt-10 md:mt-0 w-full md:w-auto'>
-                                    <p className='text-white  xl:text-[45px] lg:text-[40px] md:text-[32px] text-[20px] font-bold text-center md:text-left'>
+                                    <p className='text-white  xl:text-[45px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center md:text-left'>
                                         <span>Discover Artistry Ceramics </span>
                                         <br />
                                         <span className='text-gray-700'>Your Gateway to </span>
@@ -41,7 +41,7 @@ const Slider = () => {
                                     </p>
                                     <p className='font-medium text-black/60 md:text-lg text-center md:text-left'>Unlock Your Creativity. Dive into Painting & Drawing</p>
                                 </div>
-                                <div className="w-full md:max-h-[550px]  flex-1 md:mb-10 md:mb-0">
+                                <div className="w-full md:max-h-[550px]  flex-1  md:mb-0">
                                     <img
                                         className="w-full h-[500px]"
                                         src="https://i.ibb.co/MC0PK8m/slider-1.png"
