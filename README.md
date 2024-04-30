@@ -8,3 +8,21 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
+
+# webSite Name
+- Pottery Pinnacle
+
+# Live Link
+- https://sparkling-paletas-aeb127.netlify.app
+
+# npm package
+- firebase
+- prop-types
+- react-icons
+- react-router-dom
+- sweetalert2
+- swiper
+
+# implement 2 package
+- react-awesome-reveal
+- react-tooltip
