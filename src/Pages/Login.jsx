@@ -14,10 +14,8 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         signIn(email, password)
-            .then(result => {
-                console.log(result);
+            .then(() => {
                 Swal.fire({
                     title: "Success!",
                     text: 'Login Successfully',
@@ -28,7 +26,6 @@ const Login = () => {
                 navigate(location?.state || '/')
             })
             .catch(error => {
-                console.log(error);
                 Swal.fire({
                     title: 'Error!',
                     text: error.message,
@@ -39,8 +36,7 @@ const Login = () => {
     }
     const handleGoogleLogin = () => {
         signinWithGoogle()
-            .then(result => {
-                console.log(result);
+            .then(() => {
                 Swal.fire({
                     title: "Success!",
                     text: 'Login Successfully',
@@ -50,7 +46,6 @@ const Login = () => {
                 navigate(location?.state || '/')
             })
             .catch(error => {
-                console.log(error.massege);
                 Swal.fire({
                     title: 'Error!',
                     text: error.message,
@@ -61,8 +56,7 @@ const Login = () => {
     }
     const handleGitHubLogIn = () => {
         signinWithGitHub()
-            .then(result => {
-                console.log(result);
+            .then(() => {
                 Swal.fire({
                     title: "Success!",
                     text: 'Login Successfully',
@@ -72,7 +66,6 @@ const Login = () => {
                 navigate(location?.state || '/')
             })
             .catch(error => {
-                console.log(error);
                 Swal.fire({
                     title: 'Error!',
                     text: error.message,

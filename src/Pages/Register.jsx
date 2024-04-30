@@ -29,10 +29,8 @@ const Register = () => {
             setRegisterError("Password must have at least one uppercase letter");
             return
         }
-        console.log(name, email, photoUrl, password);
         createUser(email, password)
-            .then(result => {
-                console.log(result.user);
+            .then(() => {
                 userInfoUpdate(name, photoUrl)
                     .then(() => {
                         Swal.fire({
@@ -47,7 +45,6 @@ const Register = () => {
                     })
             })
             .catch(error => {
-                console.log(error.message);
                 setRegisterError(error.message)
                 Swal.fire({
                     title: "error!",

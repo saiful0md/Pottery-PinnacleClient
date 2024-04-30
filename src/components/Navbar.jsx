@@ -1,6 +1,7 @@
 
 import { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
@@ -24,7 +25,7 @@ const Navbar = () => {
         } to={'/'}>Home</NavLink></li>
         <li><NavLink className={({ isActive, isPending }) =>
             [
-                 isPending
+                isPending
                     ? "pending"
                     : isActive
                         ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
@@ -33,7 +34,7 @@ const Navbar = () => {
         } to={'/allArtAndCraft'}>All Art & craft Items</NavLink></li>
         <li><NavLink className={({ isActive, isPending }) =>
             [
-                 isPending
+                isPending
                     ? "pending"
                     : isActive
                         ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
@@ -42,7 +43,7 @@ const Navbar = () => {
         } to={'/addCraft'}>Add Craft Item</NavLink></li>
         <li><NavLink className={({ isActive, isPending }) =>
             [
-                 isPending
+                isPending
                     ? "pending"
                     : isActive
                         ? "text-amber-700 border-b-4 border-amber-700 hover:text-amber-700 hover:bg-transparent bg-transparent rounded-none"
@@ -63,7 +64,14 @@ const Navbar = () => {
                 navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                if (error) {
+                    Swal.fire({
+                        title: "error!",
+                        text: error.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                }
             })
     }
 
@@ -78,7 +86,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn bg-transparent border-none shadow-none hover:bg-transparent lg:text-xl">Pottery Pinnacle</a>
+                <a className="btn bg-transparent border-none shadow-none hover:bg-transparent lg:text-xl"><img className='w-40' src="https://i.ibb.co/Pjycd60/Pottery-Pinnacle.png" alt="" /></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

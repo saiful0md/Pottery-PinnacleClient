@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const AllArtAndCraft = () => {
     const [allproducts, setAllproducts] = useState([])
-    console.log(allproducts);
 
 
     useEffect(() => {
