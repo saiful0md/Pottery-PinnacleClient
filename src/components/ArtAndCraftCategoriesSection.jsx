@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 
 const ArtAndCraftCategoriesSection = () => {
@@ -27,9 +26,9 @@ const ArtAndCraftCategoriesSection = () => {
                         <div className="card-body items-center text-center">
                             <p className="text-3xl">{product.subCategory}</p>
                             <div className="card-actions">
-                                <Link to={`/viewDetailsCraftItem/${product._id}`}>
+                                {/* <Link to={`/subCategory/${product._id}`}> */}
                                     <button className="btn my-3 btn-sm bg-green-600 hover:bg-green-400 text-white">View Details</button>
-                                </Link>
+                                {/* </Link> */}
                             </div>
                         </div>
                     </div>
