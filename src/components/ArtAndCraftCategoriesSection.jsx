@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Fade } from "react-awesome-reveal";
 
 
 const ArtAndCraftCategoriesSection = () => {
@@ -14,8 +15,12 @@ const ArtAndCraftCategoriesSection = () => {
 
         <div className="max-w-6xl mx-auto my-20">
             <div>
-                <h2 className="text-4xl font-bold text-center my-8">Art and Craft</h2>
-                <p className="text-center">Artisanal Elegance: Hand-Painted Ceramic Vase, Elevating Every Corner of Your Home.</p>
+                <Fade direction="right">
+                    <h2 className="text-4xl font-bold text-center my-8">Art and Craft</h2>
+                </Fade>
+                <Fade direction="left">
+                    <p className="text-center">Artisanal Elegance: Hand-Painted Ceramic Vase, Elevating Every Corner of Your Home.</p>
+                </Fade>
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 my-10 gap-5">
                 {products.map(product => (
@@ -27,7 +32,7 @@ const ArtAndCraftCategoriesSection = () => {
                             <p className="text-3xl">{product.subCategory}</p>
                             <div className="card-actions">
                                 {/* <Link to={`/subCategory/${product._id}`}> */}
-                                    <button className="btn my-3 btn-sm bg-green-600 hover:bg-green-400 text-white">View Details</button>
+                                <button className="btn my-3 btn-sm bg-green-600 hover:bg-green-400 text-white">View Details</button>
                                 {/* </Link> */}
                             </div>
                         </div>

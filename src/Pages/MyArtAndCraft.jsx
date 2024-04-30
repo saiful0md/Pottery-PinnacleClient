@@ -3,6 +3,7 @@ import { FaArrowAltCircleLeft, FaStar } from "react-icons/fa";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
@@ -100,8 +101,9 @@ const MyArtAndCraft = () => {
                                     <p><span className="font-semibold">Customization:</span> <span>{product.customization}</span></p>
 
                                     <div className="card-actions my-3">
-                                        <Link to={`/update/${product._id}`}><button className="btn btn-sm bg-green-600 hover:bg-green-400 text-white"><GrDocumentUpdate></GrDocumentUpdate></button></Link>
-                                        <button onClick={() => handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
+                                        <Link to={`/update/${product._id}`}><button data-tooltip-id="my-tooltip-1" className="btn btn-sm bg-green-600 hover:bg-green-400 text-white"><GrDocumentUpdate></GrDocumentUpdate></button></Link>
+
+                                        <button data-tooltip-id="my-tooltip-2" onClick={() => handleDelete(product._id)} className="btn btn-sm bg-red-600 hover:bg-red-500 text-white"><RiDeleteBin6Line></RiDeleteBin6Line></button>
                                     </div>
                                 </div>
                             </div>
@@ -109,6 +111,16 @@ const MyArtAndCraft = () => {
                     ))
                 }
             </div>
+            <ReactTooltip
+                id="my-tooltip-1"
+                place="bottom"
+                content="Update"
+            />
+            <ReactTooltip
+                id="my-tooltip-2"
+                place="bottom"
+                content="Delete"
+            />
         </div>
     );
 };
