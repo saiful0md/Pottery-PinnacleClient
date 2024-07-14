@@ -26,3 +26,11 @@ Currently, two official plugins are available:
 # implement 2 package
 - react-awesome-reveal
 - react-tooltip
+
+  ## Installation
+
+Use the package manager 
+
+```bash
+npm install
+```
