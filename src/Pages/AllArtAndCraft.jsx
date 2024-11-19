@@ -16,7 +16,7 @@ const AllArtAndCraft = () => {
     return (
         <div className=" max-w-6xl mx-auto my-10">
             <div>
-                <p className="text-4xl ml-10 my-12"> AllArtAndCraft</p>
+                <p className="text-4xl ml-10 my-12"> All Art And Craft</p>
             </div>
             <div>
                 {/* head */}
